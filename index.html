@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Foxxing Girl 股價試算器</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+        <div class="countainer">
+            <div class="set_area">
+                <table>
+                    <tr>
+                        <td id="tb_big_title" colspan="2">SETTING AREA</td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">單一股價</td>
+                        <td><input id="set_stock_price" class="input_S" type="number" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">數量［張］</td>
+                        <td><input id="set_stock_num" class="input_S" type="number" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">買賣手續費［％］</td>
+                        <td><input id="set_commi" class="input_S" type="number" value="0.1425"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">手續折扣後％數</td>
+                        <td><input id="set_discount_per" class="input_S" type="number" value="100"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">手續折扣價＄</td>
+                        <td><input id="set_discount_price" class="input_S" type="number" value="0"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">證交稅［％］</td>
+                        <td><input id="set_tax_per" class="input_S" type="number" value="0.3"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">手續費最低 20</td>
+                        <td>
+                            <button class="btn_tax_low20" onclick="change_mincommi()">CHANGE</button>
+                            <script>
+                            	var mincommi = new Boolean(true);
+                                function change_mincommi(){
+                                    if(mincommi)
+                                    {
+                                        mincommi = false;  
+                                        document.getElementById("show_tax_on").innerHTML = "現在關閉";
+                                    }
+                                    else
+                                    {
+                                        mincommi = true;
+                                        document.getElementById("show_tax_on").innerHTML = "現在開啟";
+                                    }
+                                }
+                            </script>
+                            <a class="show_tax_on" id="show_tax_on">現在開啟</a>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn_area">
+                    <button class="btn_three" onclick="reset_value()" id="btn_reset">重設</button>
+                    <script>
+                        function reset_value(){
+                            document.getElementById("set_stock_price").value = "0";
+                            document.getElementById("set_stock_num").value = "1";
+                            document.getElementById("set_commi").value = "0.1425";
+                            document.getElementById("set_discount_per").value = "100";
+                            document.getElementById("set_discount_price").value = "0";
+                            document.getElementById("set_tax_per").value = "0.3";
+                        }
+                    </script>
+                    <button onclick="set_tax_per_ETF()" class="btn_three" id="btn_tax_etf">ETF</button>
+                    <button onclick="set_tax_per_STOCK()" class="btn_three" id="btn_tax_stock">證券</button>
+                    <script>
+                        function set_tax_per_ETF(){
+                            document.getElementById("set_tax_per").value = "0.1";
+                        }
+                        function set_tax_per_STOCK(){
+                            document.getElementById("set_tax_per").value = "0.3";
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="sol_area">
+                <div class="btn_area_activity">
+                   <table>
+                      <tr>
+                          <td colspan="2" id="tb_big_title">CHOOSE MODE</td>
+                      </tr>
+                       <tr>
+                           <td><button class="btn_two" onclick="buy_stock()" id="btn_buystockfun">買入</button></td>
+                           <td><button class="btn_two" onclick="sell_stock()" id="btn_sellstockfun">賣出</button></td>
+                       </tr>
+                   </table>
+                    
+                   <script>
+                        function buy_stock(){
+                            try{
+                                var set_stock_price = parseFloat(document.getElementById("set_stock_price").value);
+                                var set_stock_num = parseFloat(document.getElementById("set_stock_num").value);
+                                var set_commi = parseFloat(document.getElementById("set_commi").value);
+                                var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
+                                var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
+                                var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);    
+                            }
+                            catch(Erre){
+                            	var set_stock_price = 100; 
+                                var set_stock_num = 1
+                                var set_commi = 0.1425;
+                                var set_discount_per = 100;
+                                var set_discount_price = 0;
+                                var set_tax_per = 0.3;
+                        	}
+                        	//count
+                        	var buy_stock_price = set_stock_price * set_stock_num * 1000;
+                        	var buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                        	if(buy_commi<20 && mincommi)
+                        	{buy_commi=20;}
+                        	
+                        	var buy_tax = 0;
+                        	var buy_total = buy_stock_price + buy_commi + buy_tax;
+                        	
+                        	//SOL OUTPUT
+                        	document.getElementById("sol_mode").innerHTML = "購入";
+                        	document.getElementById("sol_stock_price").innerHTML = buy_stock_price+"";
+                        	document.getElementById("sol_commi").innerHTML =buy_commi+"";
+                        	document.getElementById("sol_tax").innerHTML = buy_tax+"";
+                        	document.getElementById("sol_total").innerHTML = buy_total+"";
+                        	document.getElementById("total_title").innerHTML = "購入成本";
+                        }  
+                        function sell_stock(){
+    				    	//SOL INPUT
+    				    	try{
+                        		var set_stock_price = parseFloat(document.getElementById("set_stock_price").value);
+                        		var set_stock_num = parseFloat(document.getElementById("set_stock_num").value);
+                        		var set_commi = parseFloat(document.getElementById("set_commi").value);
+                        		var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
+                        		var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
+                        		var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);    
+                	   	   }
+                	   	   catch(Erre){
+                        	   var set_stock_price = 100; 
+                        	   var set_stock_num = 1
+                        	   var set_commi = 0.1425;
+                        	   var set_discount_per = 100;
+                        	   var set_discount_price = 0;
+                        	   var set_tax_per = 0.3;
+                	   	   }
+    				    	//count
+    				    	var sell_stock_price = set_stock_price * set_stock_num * 1000;
+    				    	var sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+    				    	if(sell_commi<20 && mincommi)
+    				    	    {sell_commi=20}
+    				    	var sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    				    	var sell_total = sell_stock_price - sell_commi - sell_tax;
+    				    	
+    				    	//SOL OUTPUT
+    				    	document.getElementById("sol_mode").innerHTML = "售出";
+    				    	document.getElementById("sol_stock_price").innerHTML = sell_stock_price+"";
+    				    	document.getElementById("sol_commi").innerHTML =sell_commi+"";
+    				    	document.getElementById("sol_tax").innerHTML = sell_tax+"";
+    				    	document.getElementById("sol_total").innerHTML = sell_total+"";
+    				    	document.getElementById("total_title").innerHTML = "獲取金額";
+					   }
+                    </script>
+                </div>
+                <table>
+                   <tr>
+                        <td id="tb_big_title" colspan="2">SOL COUNT AREA</td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">交易模式</td>
+                        <td><p id="sol_mode">no ANS</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">股價</td>
+                        <td><p id="sol_stock_price">no ANS</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">銀行手續費</td>
+                        <td><p id="sol_commi">no ANS</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">稅金</td>
+                        <td><p id="sol_tax">no ANS</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title"><p id="total_title">總額</p></td>
+                        <td><p id="sol_total">no ANS</p></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="earn_area">
+               <table>
+                  <tr>
+                      <td id="tb_big_title" colspan="2">收益試算工具</td>
+                  </tr>
+                   <tr>
+                        <td class="tb_title">損/益</td>
+                        <td>
+                           <script>
+                            	var count_mode = "E";
+                                function change_count_mode(){
+                                    if(count_mode=="E")
+                                    {
+                                        count_mode = "S";
+                                        document.getElementById("show_on_countmode").innerHTML = "現在為損";
+                                    }
+                                    else if(count_mode =="S")
+                                    {
+                                        count_mode = "E";
+                                        document.getElementById("show_on_countmode").innerHTML = "現在為益";
+                                    }
+                                    else
+                                    {}
+                                }
+                            </script>
+                            <a class="show_tax_on" id="show_on_countmode">現在為益</a>
+                            <button class="btn_tax_low20" onclick="change_count_mode()">CHANGE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">演算法</td>
+                        <td>
+                           <script>
+                            	var count_way = "price";
+                                function change_count_way(){
+                                    if(count_way == "price")
+                                    {
+                                        count_way = "persent";
+                                        document.getElementById("show_on_countway").innerHTML = "比例試算";
+                                    }
+                                    else
+                                    {
+                                        count_way = "price";
+                                        document.getElementById("show_on_countway").innerHTML = "價格試算";
+                                    }
+                                }
+                            </script>
+                            <a class="show_tax_on" id="show_on_countway">價格試算</a>
+                            <button class="btn_tax_low20" onclick="change_count_way()">CHANGE</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">目標</td>
+                        <td><input id="count_target" class="input_S" type="number" value="1"></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">區間</td>
+                        <td><input id="count_gap" class="input_S" type="number" value="0.01"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="btn_two" onclick="count_stock()" id="btn_countstockfun">立即試算</button>
+                        </td>
+                    </tr>
+               </table>
+              <table>
+                  <tr>
+                      <td id="tb_big_title" colspan="2">收益試算結果</td>
+                  </tr>
+                   <tr>
+                        <td class="tb_title">損/益</td>
+                        <td><p id="show_count_mode">未計算</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">目標股價</td>
+                        <td><p id="show_count_target">未計算</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">預估損益</td>
+                        <td><p id="show_count_target_price">未計算</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">損益金額</td>
+                        <td><p id="show_count_price">未計算</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">購入成本</td>
+                        <td><p id="show_count_buy">未計算</p></td>
+                    </tr>
+                    <tr>
+                        <td class="tb_title">售出成本</td>
+                        <td><p id="show_count_sell">未計算</p></td>
+                    </tr>
+               </table>
+               <script>
+                   function count_stock(){
+                        //get set
+                        try{
+                            var count_target = parseFloat(document.getElementById("count_target").value);
+                            var count_gap = parseFloat(document.getElementById("count_gap").value);
+                        }
+                        catch(Err){
+                            window.alert("損益與演算法選擇有誤");
+                        }
+                       
+                        //set count
+                        try{
+                            var set_stock_price = parseFloat(document.getElementById("set_stock_price").value);
+                            var set_stock_num = parseFloat(document.getElementById("set_stock_num").value);
+                            var set_commi = parseFloat(document.getElementById("set_commi").value);
+                            var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
+                            var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
+                            var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);    
+                        }
+                        catch(Erre){
+                       	    var set_stock_price = 100; 
+                            var set_stock_num = 1
+                            var set_commi = 0.1425;
+                            var set_discount_per = 100;
+                            var set_discount_price = 0;
+                            var set_tax_per = 0.3;
+                        }
+                        //buy need
+                        var buy_stock_price = set_stock_price * set_stock_num * 1000;
+                        var buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                        if(buy_commi<20 && mincommi)
+                            {buy_commi=20;}
+                        var buy_tax = 0;
+                        var buy_total = buy_stock_price + buy_commi + buy_tax;
+                       
+                        //sell get
+    				    var sell_stock_price = set_stock_price * set_stock_num * 1000;
+    					var sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                        if(sell_commi<20 && mincommi)
+    					    {sell_commi=20}
+                        var sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    					var sell_total = sell_stock_price - sell_commi - sell_tax;
+                        
+                        //count
+                        if(count_mode=="E")
+                        {
+                            document.getElementById("show_count_mode").innerHTML = "益";
+                            if(count_way=="persent")
+                            {
+                                buy_stock_price = set_stock_price * set_stock_num * 1000;
+                                buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                if(buy_commi<20 && mincommi)
+                                    {buy_commi=20;}
+                                buy_total = buy_stock_price + buy_commi;
+                                
+                                var target_price = set_stock_price * set_stock_num * 1000 * count_target / 100;
+                                document.getElementById("show_count_target_price").innerHTML = target_price +"";
+
+                                var base_value = 0;
+                                while(base_value < target_price)
+                                {
+                                    set_stock_price += count_gap;
+                                    
+                                    sell_stock_price = set_stock_price * set_stock_num * 1000;
+                                    sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                    if(sell_commi<20 && mincommi)
+    					               {sell_commi=20}
+                                    sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    					            sell_total = sell_stock_price - sell_commi - sell_tax;
+                                    base_value = sell_total - buy_total;
+                                }
+                                document.getElementById("show_count_target").innerHTML = set_stock_price +"";
+                                document.getElementById("show_count_price").innerHTML = base_value +"";
+                                document.getElementById("show_count_buy").innerHTML = buy_total +"";
+                                document.getElementById("show_count_sell").innerHTML = sell_total +"";
+                            }
+                            else if(count_way=="price")
+                            {
+                                buy_stock_price = set_stock_price * set_stock_num * 1000;
+                                buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                if(buy_commi<20 && mincommi)
+                                    {buy_commi=20;}
+                                buy_total = buy_stock_price + buy_commi;
+                                
+                                var target_price = count_target;
+                                document.getElementById("show_count_target_price").innerHTML = target_price +"";
+
+                                var base_value = 0;
+                                while(base_value < target_price)
+                                {
+                                    set_stock_price += count_gap;
+                                    
+                                    sell_stock_price = set_stock_price * set_stock_num * 1000;
+                                    sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                    if(sell_commi<20 && mincommi)
+    					               {sell_commi=20}
+                                    sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    					            sell_total = sell_stock_price - sell_commi - sell_tax;
+                                    base_value = sell_total - buy_total;
+                                }
+                                document.getElementById("show_count_target").innerHTML = set_stock_price +"";
+                                document.getElementById("show_count_price").innerHTML = base_value +"";
+                                document.getElementById("show_count_buy").innerHTML = buy_total +"";
+                                document.getElementById("show_count_sell").innerHTML = sell_total +"";
+                            }
+                            else
+                            {
+                                window.alert("WAY ERROR");
+                            }
+                        }
+                        else if(count_mode=="S")
+                        {
+                            document.getElementById("show_count_mode").innerHTML = "損";
+                            if(count_way=="persent")
+                            {
+                                buy_stock_price = set_stock_price * set_stock_num * 1000;
+                                buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                if(buy_commi<20 && mincommi)
+                                    {buy_commi=20;}
+                                buy_total = buy_stock_price + buy_commi;
+                                
+                                var target_price = set_stock_price * set_stock_num * 1000 * count_target / 100;
+                                document.getElementById("show_count_target_price").innerHTML = target_price +"";
+
+                                var base_value = 0;
+                                while(base_value < target_price)
+                                {
+                                    set_stock_price -= count_gap;
+                                    
+                                    sell_stock_price = set_stock_price * set_stock_num * 1000;
+                                    sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                    if(sell_commi<20 && mincommi)
+    					               {sell_commi=20}
+                                    sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    					            sell_total = sell_stock_price - sell_commi - sell_tax;
+                                    base_value = buy_total - sell_total;
+                                }
+                                document.getElementById("show_count_target").innerHTML = set_stock_price +"";
+                                document.getElementById("show_count_price").innerHTML = base_value +"";
+                                document.getElementById("show_count_buy").innerHTML = buy_total +"";
+                                document.getElementById("show_count_sell").innerHTML = sell_total +"";
+                            }
+                            else if(count_way=="price")
+                            {
+                                buy_stock_price = set_stock_price * set_stock_num * 1000;
+                                buy_commi = ( buy_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                if(buy_commi<20 && mincommi)
+                                    {buy_commi=20;}
+                                buy_total = buy_stock_price + buy_commi;
+                                
+                                var target_price = count_target;
+                                document.getElementById("show_count_target_price").innerHTML = target_price +"";
+
+                                var base_value = 0;
+                                while(base_value < target_price)
+                                {
+                                    set_stock_price -= count_gap;
+                                    
+                                    sell_stock_price = set_stock_price * set_stock_num * 1000;
+                                    sell_commi = ( sell_stock_price * set_commi / 100 ) * (set_discount_per / 100) - set_discount_price ;
+                                    if(sell_commi<20 && mincommi)
+    					               {sell_commi=20}
+                                    sell_tax = sell_stock_price * ( set_tax_per / 100 ) ;
+    					            sell_total = sell_stock_price - sell_commi - sell_tax;
+                                    base_value = buy_total - sell_total;
+                                }
+                                document.getElementById("show_count_target").innerHTML = set_stock_price +"";
+                                document.getElementById("show_count_price").innerHTML = base_value +"";
+                                document.getElementById("show_count_buy").innerHTML = buy_total +"";
+                                document.getElementById("show_count_sell").innerHTML = sell_total +"";
+                            }
+                            else
+                            {
+                                window.alert("WAY ERROR");
+                            }
+                        }
+                        else
+                        {
+                            window.alert("MODE ERROR")
+                        }
+                       
+                       
+                        
+                    }
+               </script>
+            </div>
+            
+        </div>
+    </body>    
+</html>
