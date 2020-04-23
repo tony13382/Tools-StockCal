@@ -2,6 +2,9 @@ table{
     width: 100%;
     border: 1px;
 }
+body{
+
+}
 div.countainer{
     width: 80%;
     margin: auto;
@@ -9,24 +12,26 @@ div.countainer{
 
 /*SETTING AREA*/
 #tb_big_title{
-    font-size: 20px;
+    font-size: 50px;
     font-family: "微軟正黑體";
     text-align: center;
+    padding-bottom: 10px;
 }
 .tb_title{
-    width: 50%;
+    width: 40%;
     text-align: right;
-    padding-right: 10px
+    padding-right: 40px;
 }
 td{
-    height: 35px;
+    height: 50px;
+    font-size: 30px;
 }
 p{
     padding: 0px;
 }
 .input_S{
     width: 85%;
-    padding: 5px;
+    padding: 10px;
     
 }
 div.set_area , div.earn_area{
@@ -52,7 +57,7 @@ div.btn_area{
 .btn_three{
     width: 32%;
     padding: 5px;
-    height: 30px;
+    height: 40px;
     background-color:dodgerblue;
     color: white;
     border-radius: 5px;
@@ -64,6 +69,7 @@ div.btn_area{
     background-color: chocolate;
     color: aliceblue;
     border-radius: 5px;
+    height: 40px;
 }
 .show_tax_on{
     width: 50%;
@@ -76,7 +82,7 @@ div.btn_area{
 .btn_two{
     width: 100%;
     padding: 5px;
-    height: 30px;
+    height: 40px;
     background-color:dodgerblue;
     color: white;
     border-radius: 5px;
