@@ -12,13 +12,15 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit-icons.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Hello, world!</title>
 </head>
 
 <body style="background-color: #FEDFE1;">
     <div class="uk-container" style="font-family:'微軟正黑體','黑體';">
         <div height="10px"></div>
-        <h1 class="uk-heading-line uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">FOX GIRL股票試算器</span></h1>
+        <h1 class="uk-heading-line uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">FOX
+                GIRL股票試算器</span></h1>
         <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-margin-small">
@@ -27,13 +29,14 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-horizontal-text">單一股價</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="set_stock_price"  type="text" placeholder="set_stock_price">
+                            <input class="uk-input" id="set_stock_price" type="text" placeholder="set_stock_price">
                         </div>
                     </div>
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-horizontal-text">數量［張］</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="set_stock_num" value="1" type="text" placeholder="set_stock_num">
+                            <input class="uk-input" id="set_stock_num" value="1" type="text"
+                                placeholder="set_stock_num">
                         </div>
                     </div>
                     <div class="uk-margin">
@@ -45,13 +48,15 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-horizontal-text">手續折扣後％數</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="set_discount_per" value="60" type="text" placeholder="set_discount_per">
+                            <input class="uk-input" id="set_discount_per" value="60" type="text"
+                                placeholder="set_discount_per">
                         </div>
                     </div>
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-horizontal-text">手續折扣價＄</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="set_discount_price" type="text" value="0" placeholder="set_discount_price">
+                            <input class="uk-input" id="set_discount_price" type="text" value="0"
+                                placeholder="set_discount_price">
                         </div>
                     </div>
                     <div class="uk-margin">
@@ -77,6 +82,26 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">Quick Cal</h3>
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-1-2@s">
+                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
+                        </div>
+                        <div class="uk-width-1-1">
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                                onclick="dis()">計算</button>
+                        </div>
+                        <div class="uk-width-1-1">
+                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
@@ -124,10 +149,19 @@
                                 <td>
                                     <p id="sol_total">no ANS</p>
                                 </td>
-
                             </tr>
                         </tbody>
                     </table>
+                    <div class="uk-grid-small" uk-grid>
+                        <div class="uk-width-1-2@s">
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                                onclick="sol_to_n1()">將數字加入被減數</button>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                                onclick="sol_to_n2()">將數字加入減數</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div>
@@ -157,11 +191,13 @@
                     <div class="uk-margin">
                         <label class="uk-form-label uk-text-right" for="form-horizontal-text">區間</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="count_gap" type="text" value="0.01" placeholder="count_gap" min="0">
+                            <input class="uk-input" id="count_gap" type="text" value="0.01" placeholder="count_gap"
+                                min="0">
                         </div>
                     </div>
                     <div class="uk-margin">
-                        <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="count_stock()">進行試算</button>
+                        <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                            onclick="count_stock()">進行試算</button>
                     </div>
 
                 </div>
@@ -380,7 +416,7 @@
                 var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
                 var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
                 var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);
-                if (isNaN(set_tax_per) || isNaN(set_discount_price) || isNaN(set_discount_per) || isNaN(set_commi) || isNaN(set_stock_num) || isNaN(set_stock_price) ) {
+                if (isNaN(set_tax_per) || isNaN(set_discount_price) || isNaN(set_discount_per) || isNaN(set_commi) || isNaN(set_stock_num) || isNaN(set_stock_price)) {
                     UIkit.notification({ message: 'INPUT INFORMATION ERROR ' });
                 }
             }
@@ -540,8 +576,36 @@
 
         }
     </script>
-
-
+    <script>
+        function dis() {
+            var n1 = parseInt(document.getElementById("quick_cal_n1").value, 10);
+            var n2 = parseInt(document.getElementById("quick_cal_n2").value, 10);
+            if (isNaN(n1) || isNaN(n2)) {
+                alert("IS NULL");
+                n1 = 0;
+                n2 = 0;
+            }
+            document.getElementById("quick_cal_ans").value = (n1 - n2);
+        }
+    </script>
+    <script>
+        function sol_to_n1() {
+            var convert = parseInt($('#sol_total').text(), 10);
+            if (isNaN(convert)) {
+                alert($('#sol_total').text());
+            }
+            else
+                document.getElementById("quick_cal_n1").value = convert;
+        }
+        function sol_to_n2() {
+            var convert = parseInt($('#sol_total').text(), 10);
+            if (isNaN(convert)) {
+                alert($('#sol_total').text());
+            }
+            else
+                document.getElementById("quick_cal_n2").value = convert;
+        }
+    </script>
 
 </body>
 
