@@ -17,295 +17,282 @@
 </head>
 
 <body style="background-color: #FEDFE1;">
-    <div class="uk-container" style="font-family:'微軟正黑體','黑體';">
+    <div class="uk-container" style="max-width: 1800px; font-family:'微軟正黑體','黑體';">
         <div height="10px"></div>
         <h1 class="uk-heading-line uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">MeowLu股票試算器</span></h1>
-        <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body uk-margin-small">
-                    <h3 class="uk-card-title">SETTING AREA</h3>
+        <div uk-grid>
+            <div class="uk-width-1-5@m">
+                <div class="uk-grid-small uk-grid-match" uk-grid uk-sticky>
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Quick Cal</h3>
+                        <div class="uk-grid-small" uk-grid>
+                            <div class="uk-width-1-2@s">
+                                <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
+                            </div>
+                            <div class="uk-width-1-2@s">
+                                <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
+                            </div>
+                            <div class="uk-width-1-1">
+                                <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="dis()">計算</button>
+                            </div>
+                            <div class="uk-width-1-1">
+                                <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-4-5@m">
+                <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body uk-margin-small">
+                            <h3 class="uk-card-title">SETTING AREA</h3>
 
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">單一股價</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_stock_price" type="text" placeholder="set_stock_price">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">數量［張］</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_stock_num" value="1" type="text"
-                                placeholder="set_stock_num">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">買賣手續費［％］</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_commi" value="0.1425" type="text" placeholder="set_commi">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">手續折扣後％數</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_discount_per" value="60" type="text"
-                                placeholder="set_discount_per">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">手續折扣價＄</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_discount_price" type="text" value="0"
-                                placeholder="set_discount_price">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">證交稅［％］</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="set_tax_per" type="text" value="0.3" disabled
-                                placeholder="set_tax_per">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">手續費最低 20</label>
-                        <div class="uk-form-controls">
-                            <button class="uk-button uk-button-primary" onclick="change_mincommi()"
-                                id="show_tax_on">現在開啟</button>
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">數值設置</label>
-                        <div class="uk-form-controls">
-                            <button class="uk-button uk-button-primary" onclick="reset_value()">重設</button>
-                            <button class="uk-button uk-button-primary" onclick="set_tax_per_ETF()">ETF</button>
-                            <button class="uk-button uk-button-primary" onclick="set_tax_per_STOCK()">證券</button>
-                        </div>
-                    </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">單一股價</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_stock_price" type="text" placeholder="set_stock_price">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">數量［張］</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_stock_num" value="1" type="text" placeholder="set_stock_num">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">買賣手續費［％］</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_commi" value="0.1425" type="text" placeholder="set_commi">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">手續折扣後％數</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_discount_per" value="60" type="text" placeholder="set_discount_per">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">手續折扣價＄</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_discount_price" type="text" value="0" placeholder="set_discount_price">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">證交稅［％］</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="set_tax_per" type="text" value="0.3" disabled placeholder="set_tax_per">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">手續費最低 20</label>
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-primary" onclick="change_mincommi()" id="show_tax_on">現在開啟</button>
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">數值設置</label>
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-primary" onclick="reset_value()">重設</button>
+                                    <button class="uk-button uk-button-primary" onclick="set_tax_per_ETF()">ETF</button>
+                                    <button class="uk-button uk-button-primary" onclick="set_tax_per_STOCK()">證券</button>
+                                </div>
+                            </div>
 
-                </div>
-            </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">Quick Cal</h3>
-                    <div class="uk-grid-small" uk-grid>
-                        <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
-                        </div>
-                        <div class="uk-width-1-2@s">
-                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
-                        </div>
-                        <div class="uk-width-1-1">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-                                onclick="dis()">計算</button>
-                        </div>
-                        <div class="uk-width-1-1">
-                            <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
                         </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">CHOOSE MODE</h3>
-                    <p uk-margin>
-                        <button class="uk-button uk-button-primary" onclick="buy_stock()">買入</button>
-                        <button class="uk-button uk-button-primary" onclick="sell_stock()">賣出</button>
-                    </p>
-                    <h3 class="uk-card-title">SOL COUNT AREA</h3>
-                    <table class="uk-table uk-table-middle uk-table-divider">
-                        <thead>
-                            <tr>
-                                <th class="uk-width-small">項目名稱</th>
-                                <th>項目數值</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>交易模式</td>
-                                <td>
-                                    <p id="sol_mode">no ANS</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>股價</td>
-                                <td>
-                                    <p id="sol_stock_price">no ANS</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>銀行手續費</td>
-                                <td>
-                                    <p id="sol_commi">no ANS</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>稅金</td>
-                                <td>
-                                    <p id="sol_tax">no ANS</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>總額</td>
-                                <td>
-                                    <p id="sol_total">no ANS</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="uk-grid-small" uk-grid>
-                        <div class="uk-width-1-2@s">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-                                onclick="sol_to_n1()">將數字加入被減數</button>
-                        </div>
-                        <div class="uk-width-1-2@s">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-                                onclick="sol_to_n2()">將數字加入減數</button>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body">
+                            <h3 class="uk-card-title">CHOOSE MODE</h3>
+                            <p uk-margin>
+                                <button class="uk-button uk-button-primary" onclick="buy_stock()">買入</button>
+                                <button class="uk-button uk-button-primary" onclick="sell_stock()">賣出</button>
+                            </p>
+                            <h3 class="uk-card-title">SOL COUNT AREA</h3>
+                            <table class="uk-table uk-table-middle uk-table-divider">
+                                <thead>
+                                    <tr>
+                                        <th class="uk-width-small">項目名稱</th>
+                                        <th>項目數值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>交易模式</td>
+                                        <td>
+                                            <p id="sol_mode">no ANS</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>股價</td>
+                                        <td>
+                                            <p id="sol_stock_price">no ANS</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>銀行手續費</td>
+                                        <td>
+                                            <p id="sol_commi">no ANS</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>稅金</td>
+                                        <td>
+                                            <p id="sol_tax">no ANS</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>總額</td>
+                                        <td>
+                                            <p id="sol_total">no ANS</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-2@s">
+                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="sol_to_n1()">將數字加入被減數</button>
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="sol_to_n2()">將數字加入減數</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">收益試算工具</h3>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">損／益</label>
-                        <div class="uk-form-controls">
-                            <button class="uk-button uk-button-primary" onclick="change_count_mode()"
-                                id="show_on_countmode">&uarr; 現在為益</button>
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">演算法</label>
-                        <div class="uk-form-controls">
-                            <button class="uk-button uk-button-primary" onclick="change_count_way()"
-                                id="show_on_countway">＄ 價格試算</button>
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">目標</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="count_target" type="text" placeholder="count_target" value="1"
-                                min="0">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <label class="uk-form-label uk-text-right" for="form-horizontal-text">區間</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="count_gap" type="text" value="0.01" placeholder="count_gap"
-                                min="0">
-                        </div>
-                    </div>
-                    <div class="uk-margin">
-                        <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-                            onclick="count_stock()">進行試算</button>
-                    </div>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body">
+                            <h3 class="uk-card-title">收益試算工具</h3>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">損／益</label>
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-primary" onclick="change_count_mode()" id="show_on_countmode">&uarr; 現在為益</button>
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">演算法</label>
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-primary" onclick="change_count_way()" id="show_on_countway">＄ 價格試算</button>
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="form-horizontal-text">目標</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="count_target" type="text" placeholder="count_target" value="1" min="0">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <label class="uk-form-label uk-text-right" for="form-horizontal-text">區間</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="count_gap" type="text" value="0.01" placeholder="count_gap" min="0">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="count_stock()">進行試算</button>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-card uk-card-default uk-card-body">
+                            <h3 class="uk-card-title">收益試算結果</h3>
+                            <table class="uk-table uk-table-middle uk-table-divider">
+                                <thead>
+                                    <tr>
+                                        <th class="uk-width-small">項目名稱</th>
+                                        <th>項目數值</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="tb_title">損/益</td>
+                                        <td>
+                                            <p id="show_count_mode">未計算</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb_title">目標股價</td>
+                                        <td>
+                                            <p id="show_count_target">未計算</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb_title">預估損益</td>
+                                        <td>
+                                            <p id="show_count_target_price">未計算</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb_title">損益金額</td>
+                                        <td>
+                                            <p id="show_count_price">未計算</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb_title">購入成本</td>
+                                        <td>
+                                            <p id="show_count_buy">未計算</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tb_title">售出成本</td>
+                                        <td>
+                                            <p id="show_count_sell">未計算</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h3 class="uk-card-title">收益試算結果</h3>
-                    <table class="uk-table uk-table-middle uk-table-divider">
-                        <thead>
-                            <tr>
-                                <th class="uk-width-small">項目名稱</th>
-                                <th>項目數值</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tb_title">損/益</td>
-                                <td>
-                                    <p id="show_count_mode">未計算</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tb_title">目標股價</td>
-                                <td>
-                                    <p id="show_count_target">未計算</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tb_title">預估損益</td>
-                                <td>
-                                    <p id="show_count_target_price">未計算</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tb_title">損益金額</td>
-                                <td>
-                                    <p id="show_count_price">未計算</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tb_title">購入成本</td>
-                                <td>
-                                    <p id="show_count_buy">未計算</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tb_title">售出成本</td>
-                                <td>
-                                    <p id="show_count_sell">未計算</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+
             </div>
         </div>
-
     </div>
-
-
-
-
-
-
-
-
     <script>
         var mincommi = new Boolean(true);
+
         function change_mincommi() {
             if (mincommi) {
                 mincommi = false;
                 document.getElementById("show_tax_on").innerHTML = "現在關閉";
                 document.getElementById("show_tax_on").className = "uk-button uk-button-danger";
-            }
-            else {
+            } else {
                 mincommi = true;
                 document.getElementById("show_tax_on").innerHTML = "現在開啟";
                 document.getElementById("show_tax_on").className = "uk-button uk-button-primary";
             }
         }
+
     </script>
     <script>
         var count_way = "price";
+
         function change_count_way() {
             if (count_way == "price") {
                 count_way = "persent";
                 document.getElementById("show_on_countway").innerHTML = "％ 比例試算";
-            }
-            else {
+            } else {
                 count_way = "price";
                 document.getElementById("show_on_countway").innerHTML = "＄ 價格試算";
             }
         }
+
     </script>
     <script>
         var count_mode = "E";
+
         function change_count_mode() {
             if (count_mode == "E") {
                 count_mode = "S";
                 document.getElementById("show_on_countmode").innerHTML = "&darr;   現在為損";
                 document.getElementById("show_on_countmode").className = "uk-button uk-button-danger";
-            }
-            else if (count_mode == "S") {
+            } else if (count_mode == "S") {
                 count_mode = "E";
                 document.getElementById("show_on_countmode").innerHTML = "&uarr;   現在為益";
                 document.getElementById("show_on_countmode").className = "uk-button uk-button-primary";
-            }
-            else { }
+            } else {}
         }
+
     </script>
     <script>
         function reset_value() {
@@ -316,14 +303,17 @@
             document.getElementById("set_discount_price").value = "0";
             document.getElementById("set_tax_per").value = "0.3";
         }
+
     </script>
     <script>
         function set_tax_per_ETF() {
             document.getElementById("set_tax_per").value = "0.1";
         }
+
         function set_tax_per_STOCK() {
             document.getElementById("set_tax_per").value = "0.3";
         }
+
     </script>
     <script>
         function buy_stock() {
@@ -334,8 +324,7 @@
                 var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
                 var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
                 var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);
-            }
-            catch (Erre) {
+            } catch (Erre) {
                 var set_stock_price = 100;
                 var set_stock_num = 1
                 var set_commi = 0.1425;
@@ -347,7 +336,9 @@
             var buy_stock_price = set_stock_price * set_stock_num * 1000;
             var buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
             buy_commi = Math.round(buy_commi);
-            if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+            if (buy_commi < 20 && mincommi) {
+                buy_commi = 20;
+            }
 
             var buy_tax = 0;
             var buy_total = buy_stock_price + buy_commi + buy_tax;
@@ -360,6 +351,7 @@
             document.getElementById("sol_total").innerHTML = buy_total + "";
             document.getElementById("total_title").innerHTML = "購入成本";
         }
+
         function sell_stock() {
             //SOL INPUT
             try {
@@ -369,8 +361,7 @@
                 var set_discount_per = parseFloat(document.getElementById("set_discount_per").value);
                 var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
                 var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);
-            }
-            catch (Erre) {
+            } catch (Erre) {
                 var set_stock_price = 100;
                 var set_stock_num = 1
                 var set_commi = 0.1425;
@@ -382,7 +373,9 @@
             var sell_stock_price = set_stock_price * set_stock_num * 1000;
             var sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
             sell_commi = Math.round(sell_commi);
-            if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+            if (sell_commi < 20 && mincommi) {
+                sell_commi = 20
+            }
             var sell_tax = sell_stock_price * (set_tax_per / 100);
             sell_tax = Math.round(sell_tax);
             var sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -395,6 +388,7 @@
             document.getElementById("sol_total").innerHTML = sell_total + "";
             document.getElementById("total_title").innerHTML = "獲取金額";
         }
+
     </script>
     <script>
         function count_stock() {
@@ -402,8 +396,7 @@
             try {
                 var count_target = parseFloat(document.getElementById("count_target").value);
                 var count_gap = parseFloat(document.getElementById("count_gap").value);
-            }
-            catch (Err) {
+            } catch (Err) {
                 window.alert("損益與演算法選擇有誤");
             }
 
@@ -416,10 +409,11 @@
                 var set_discount_price = parseFloat(document.getElementById("set_discount_price").value);
                 var set_tax_per = parseFloat(document.getElementById("set_tax_per").value);
                 if (isNaN(set_tax_per) || isNaN(set_discount_price) || isNaN(set_discount_per) || isNaN(set_commi) || isNaN(set_stock_num) || isNaN(set_stock_price)) {
-                    UIkit.notification({ message: 'INPUT INFORMATION ERROR ' });
+                    UIkit.notification({
+                        message: 'INPUT INFORMATION ERROR '
+                    });
                 }
-            }
-            catch (Erre) {
+            } catch (Erre) {
                 var set_stock_price = 100;
                 var set_stock_num = 1
                 var set_commi = 0.1425;
@@ -431,7 +425,9 @@
             var buy_stock_price = set_stock_price * set_stock_num * 1000;
             var buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
             buy_commi = Math.round(buy_commi);
-            if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+            if (buy_commi < 20 && mincommi) {
+                buy_commi = 20;
+            }
             var buy_tax = 0;
             var buy_total = buy_stock_price + buy_commi + buy_tax;
 
@@ -439,7 +435,9 @@
             var sell_stock_price = set_stock_price * set_stock_num * 1000;
             var sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
             sell_commi = Math.round(sell_commi);
-            if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+            if (sell_commi < 20 && mincommi) {
+                sell_commi = 20
+            }
             var sell_tax = sell_stock_price * (set_tax_per / 100);
             sell_tax = Math.round(sell_tax);
             var sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -451,7 +449,9 @@
                     buy_stock_price = set_stock_price * set_stock_num * 1000;
                     buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                     buy_commi = Math.round(buy_commi);
-                    if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+                    if (buy_commi < 20 && mincommi) {
+                        buy_commi = 20;
+                    }
                     buy_total = buy_stock_price + buy_commi;
 
                     var target_price = set_stock_price * set_stock_num * 1000 * count_target / 100;
@@ -464,7 +464,9 @@
                         sell_stock_price = set_stock_price * set_stock_num * 1000;
                         sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                         sell_commi = Math.round(sell_commi);
-                        if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+                        if (sell_commi < 20 && mincommi) {
+                            sell_commi = 20
+                        }
                         sell_tax = sell_stock_price * (set_tax_per / 100);
                         sell_tax = Math.round(sell_tax);
                         sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -474,12 +476,13 @@
                     document.getElementById("show_count_price").innerHTML = base_value + "";
                     document.getElementById("show_count_buy").innerHTML = buy_total + "";
                     document.getElementById("show_count_sell").innerHTML = sell_total + "";
-                }
-                else if (count_way == "price") {
+                } else if (count_way == "price") {
                     buy_stock_price = set_stock_price * set_stock_num * 1000;
                     buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                     buy_commi = Math.round(buy_commi);
-                    if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+                    if (buy_commi < 20 && mincommi) {
+                        buy_commi = 20;
+                    }
                     buy_total = buy_stock_price + buy_commi;
 
                     var target_price = count_target;
@@ -491,7 +494,9 @@
                         sell_stock_price = set_stock_price * set_stock_num * 1000;
                         sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                         sell_commi = Math.round(sell_commi);
-                        if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+                        if (sell_commi < 20 && mincommi) {
+                            sell_commi = 20
+                        }
                         sell_tax = sell_stock_price * (set_tax_per / 100);
                         sell_tax = Math.round(sell_tax);
                         sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -501,18 +506,18 @@
                     document.getElementById("show_count_price").innerHTML = base_value + "";
                     document.getElementById("show_count_buy").innerHTML = buy_total + "";
                     document.getElementById("show_count_sell").innerHTML = sell_total + "";
-                }
-                else {
+                } else {
                     window.alert("WAY ERROR");
                 }
-            }
-            else if (count_mode == "S") {
+            } else if (count_mode == "S") {
                 document.getElementById("show_count_mode").innerHTML = "損";
                 if (count_way == "persent") {
                     buy_stock_price = set_stock_price * set_stock_num * 1000;
                     buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                     buy_commi = Math.round(buy_commi);
-                    if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+                    if (buy_commi < 20 && mincommi) {
+                        buy_commi = 20;
+                    }
                     buy_total = buy_stock_price + buy_commi;
                     var target_price = set_stock_price * set_stock_num * 1000 * count_target / 100;
                     document.getElementById("show_count_target_price").innerHTML = target_price + "";
@@ -524,7 +529,9 @@
                         sell_stock_price = set_stock_price * set_stock_num * 1000;
                         sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                         sell_commi = Math.round(sell_commi);
-                        if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+                        if (sell_commi < 20 && mincommi) {
+                            sell_commi = 20
+                        }
                         sell_tax = sell_stock_price * (set_tax_per / 100);
                         sell_tax = Math.round(sell_tax);
                         sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -534,12 +541,13 @@
                     document.getElementById("show_count_price").innerHTML = base_value + "";
                     document.getElementById("show_count_buy").innerHTML = buy_total + "";
                     document.getElementById("show_count_sell").innerHTML = sell_total + "";
-                }
-                else if (count_way == "price") {
+                } else if (count_way == "price") {
                     buy_stock_price = set_stock_price * set_stock_num * 1000;
                     buy_commi = (buy_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                     buy_commi = Math.round(buy_commi);
-                    if (buy_commi < 20 && mincommi) { buy_commi = 20; }
+                    if (buy_commi < 20 && mincommi) {
+                        buy_commi = 20;
+                    }
                     buy_total = buy_stock_price + buy_commi;
 
                     var target_price = count_target;
@@ -552,7 +560,9 @@
                         sell_stock_price = set_stock_price * set_stock_num * 1000;
                         sell_commi = (sell_stock_price * set_commi / 100) * (set_discount_per / 100) - set_discount_price;
                         sell_commi = Math.round(sell_commi);
-                        if (sell_commi < 20 && mincommi) { sell_commi = 20 }
+                        if (sell_commi < 20 && mincommi) {
+                            sell_commi = 20
+                        }
                         sell_tax = sell_stock_price * (set_tax_per / 100);
                         sell_tax = Math.round(sell_tax);
                         sell_total = sell_stock_price - sell_commi - sell_tax;
@@ -562,18 +572,17 @@
                     document.getElementById("show_count_price").innerHTML = base_value + "";
                     document.getElementById("show_count_buy").innerHTML = buy_total + "";
                     document.getElementById("show_count_sell").innerHTML = sell_total + "";
-                }
-                else {
+                } else {
                     window.alert("WAY ERROR");
                 }
-            }
-            else {
+            } else {
                 window.alert("MODE ERROR")
             }
 
 
 
         }
+
     </script>
     <script>
         function dis() {
@@ -586,26 +595,30 @@
             }
             document.getElementById("quick_cal_ans").value = (n1 - n2);
         }
+
     </script>
     <script>
         function sol_to_n1() {
             var convert = parseInt($('#sol_total').text(), 10);
             if (isNaN(convert)) {
                 alert($('#sol_total').text());
-            }
-            else
+            } else
                 document.getElementById("quick_cal_n1").value = convert;
         }
+
         function sol_to_n2() {
             var convert = parseInt($('#sol_total').text(), 10);
             if (isNaN(convert)) {
                 alert($('#sol_total').text());
-            }
-            else
+            } else
                 document.getElementById("quick_cal_n2").value = convert;
         }
+
     </script>
-
 </body>
-
+    <footer>
+        <div class="uk-text-center uk-card-body">
+            COPYRIGHT BY 2020
+        </div>
+    </footer>
 </html>
