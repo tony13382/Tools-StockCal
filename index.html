@@ -86,7 +86,11 @@
                             <div class="uk-margin">
                                 <label class="uk-form-label" for="form-horizontal-text">證交稅［％］</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="set_tax_per" type="text" value="0.3" disabled placeholder="set_tax_per">
+                                    <select class="uk-select" id="set_tax_per">
+                                        <option value="0.1">0.1 (ETF)</option>
+                                        <option value="0.3" selected>0.3 (股票)</option>
+                                        <option value="0.15">0.15 (當沖股票)</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="uk-margin">
@@ -96,20 +100,9 @@
                                 </div>
                             </div>
                             <div class="uk-margin ">
-                                <label class="uk-form-label" for="form-horizontal-text">證交稅數值設置</label>
-                                <div class="uk-grid-small" uk-grid>
-                                    <div class="uk-width-1-4@s">
-                                        <button class="uk-button uk-width-1-1 uk-button-default" onclick="set_tax_per(0.1)">ETF</button>
-                                    </div>
-                                    <div class="uk-width-1-4@s">
-                                        <button class="uk-button uk-width-1-1 uk-button-default" onclick="set_tax_per(0.3)">證券</button>
-                                    </div>
-                                    <div class="uk-width-1-4@s">
-                                        <button class="uk-button uk-width-1-1 uk-button-default" onclick="set_tax_per(0.15)">當沖股票</button>
-                                    </div>
-                                    <div class="uk-width-1-4@s">
-                                        <button class="uk-button uk-width-1-1 uk-button-danger" onclick="reset_value()">全部重設</button>
-                                    </div>
+                                <label class="uk-form-label" for="form-horizontal-text">證數值設置</label>
+                                <div class="uk-form-controls">
+                                    <button class="uk-button uk-button-danger" onclick="reset_value()">全部重設</button>
                                 </div>
                             </div>
 

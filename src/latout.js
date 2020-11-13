@@ -26,10 +26,6 @@ function change_count_mode() {
         document.getElementById("show_on_countmode").className = "uk-button uk-button-primary";
     } else {}
 }
-/*設定證交稅試算金額*/
-function set_tax_per(set_num) {
-    document.getElementById("set_tax_per").value = set_num + "";
-}
 /*RESET 預設值*/
 function reset_value() {
     document.getElementById("set_stock_price").value = "0";
