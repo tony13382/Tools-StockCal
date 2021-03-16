@@ -1,5 +1,6 @@
 # Maker
-Meow LU (Foxxing Girl)
+Meow LU (MeowLu)
+[Maker's Personal Website](https://tony13382.github.io/myinfo/)
 
 # Function
 stock_fun()
