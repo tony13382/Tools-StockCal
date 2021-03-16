@@ -149,6 +149,30 @@ function count_stock() {
 		
 		var set_target_value = parseFloat(document.getElementById("count_target").value);
 		var set_gap_value = parseFloat(document.getElementById("count_gap").value);
+        if (set_gap_value >= 10) {
+            if (set_stock_price >= 1000) {
+                set_gap_value = 5;
+            }
+            else if (set_stock_price >= 500){
+                set_gap_value = 1;
+            }
+            else if (set_stock_price >= 100){
+                set_gap_value = 0.5;
+            }
+            else if (set_stock_price >= 50){
+                set_gap_value = 0.1;
+            }
+            else if (set_stock_price >= 10){
+                set_gap_value = 0.05;
+            }
+            else if (set_stock_price >= 0){
+                set_gap_value = 0.01;
+            }
+            else{
+                set_gap_value = 0.05;
+                console.log("ERR AUTO GAP")
+            }
+        }
 		var target = 0;
 		
 		var count = new stock_fun;
