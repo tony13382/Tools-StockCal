@@ -20,35 +20,41 @@
 </head>
 
 <body style="background-color: #FEDFE1;">
-    <div class="uk-container" style="max-width: 1800px; font-family:'微軟正黑體','黑體';">
-        <div height="10px"></div>
-        <h1 class="uk-heading-line uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">MeowLu股票試算器</span></h1>
-        
-        <div uk-grid>
-            <div class="uk-width-1-5@m">
-                <div class="uk-grid-small uk-child-width-1-1@m uk-grid-match" uk-grid>
-                    <div>
-                        <div class="uk-card uk-card-default uk-card-body">
-                            <h3 class="uk-card-title">Quick Cal</h3>
-                            <div class="uk-grid-small" uk-grid>
-                                <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
-                                </div>
-                                <div class="uk-width-1-2@s">
-                                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
-                                </div>
-                                <div class="uk-width-1-1">
-                                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" onclick="dis()">計算</button>
-                                </div>
-                                <div class="uk-width-1-1">
-                                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <h3 class="uk-card-title">Quick Cal</h3>
+            <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
+                </div>
+                <div class="uk-width-1-2@s">
+                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
+                </div>
+                <div class="uk-width-1-1">
+                    <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+                        onclick="dis()">計算</button>
+                </div>
+                <div class="uk-width-1-1">
+                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
                 </div>
             </div>
-            <div class="uk-width-4-5@m">
+
+        </div>
+    </div>
+    <div class="uk-container" style="max-width: 1800px; font-family:'微軟正黑體','黑體';">
+        <div height="10px"></div>
+        <h1 class="uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">MeowLu股票試算器</span></h1>
+        
+        <div uk-grid>
+            <div class="">
+                <button class="uk-button uk-button-primary " type="button" uk-toggle="target: #offcanvas-overlay" style="width: 80px; height: 80px; padding: 0px;  border-radius: 16px; z-index: 10000; position: fixed; bottom: 16px; right: 16px; background-color: #b0898e;">
+                    <?xml version="1.0" encoding="UTF-8"?><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="white" fill-opacity="0.01"/><path d="M48 0H0V48H48V0Z" fill="white" fill-opacity="0.01"/><path d="M40.0005 4H8.00069C6.89614 4 6.00071 4.89541 6.00069 5.99996L6.00004 42C6.00002 43.1045 6.89546 44 8.00004 44H40.0005C41.1051 44 42.0005 43.1046 42.0005 42V6C42.0005 4.89543 41.1051 4 40.0005 4Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="M35 10H13V19H35V10Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="M12 28L19 35" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 28L12 35" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 35H36" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 29H36" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+            </div>
+            <div class="">
                 <div class="uk-child-width-1-2@m uk-grid-small uk-grid-match" uk-grid>
                     <div>
                         <div class="uk-card uk-card-default uk-card-body uk-margin-small">
