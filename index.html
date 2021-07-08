@@ -21,24 +21,24 @@
 
 <body style="background-color: #FEDFE1;">
     <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
-        <div class="uk-offcanvas-bar">
+        <div class="uk-offcanvas-bar" style="background-color: #63484d;">
 
             <button class="uk-offcanvas-close" type="button" uk-close></button>
 
             <h3 class="uk-card-title">Quick Cal</h3>
             <div class="uk-grid-small" uk-grid>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n1">
+                    <input class="uk-input" type="number" placeholder="被減數" id="quick_cal_n1">
                 </div>
                 <div class="uk-width-1-2@s">
-                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_n2">
+                    <input class="uk-input" type="number" placeholder="減數" id="quick_cal_n2">
                 </div>
                 <div class="uk-width-1-1">
                     <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
                         onclick="dis()">計算</button>
                 </div>
                 <div class="uk-width-1-1">
-                    <input class="uk-input" type="number" placeholder="50" id="quick_cal_ans">
+                    <input class="uk-input" type="number" placeholder="答案" id="quick_cal_ans">
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="uk-margin ">
-                                <label class="uk-form-label" for="form-horizontal-text">證數值設置</label>
+                                <label class="uk-form-label" for="form-horizontal-text">數值設置</label>
                                 <div class="uk-form-controls">
                                     <button class="uk-button uk-button-danger" onclick="reset_value()">全部重設</button>
                                 </div>
