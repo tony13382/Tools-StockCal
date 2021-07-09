@@ -42,19 +42,22 @@
                 </div>
             </div>
 
-            <div style="display: flex; align-items:center;" class="uk-margin-top ">
+            <div style="display: flex; align-items:center; " class="uk-margin-top">
                 <h3 class="uk-margin-remove-bottom" style="display: inline-flex;">計算紀錄</h3>
                 <button class="uk-button uk-button-default uk-margin-small-bottom" onclick="clearRecord()"
                     style="width: 56px; height: 56px; padding: 0px; margin:0px 10px !important; border: none; display: inline-flex; align-items:center;">
                     <?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" style="display: flex;" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="white" fill-opacity="0.01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M20 5.91396H28V13.914H43V21.914H5V13.914H20V5.91396Z" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 40H40V22H8V40Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="M16 39.8975V33.914" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 39.8975V33.8975" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 39.8975V33.914" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 40H36" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
             </div>
-            <table class="uk-table uk-table-small uk-table-divider uk-margin-remove-top">
-                <tbody id="record-list">
-                    <tr><td>無計算紀錄</td></tr>
-                </tbody>
-            </table>
-
+            <div class=" uk-overflow-auto">
+                <table class="uk-table uk-table-small uk-table-divider uk-margin-remove-top">
+                    <tbody id="record-list">
+                        <tr>
+                            <td>無計算紀錄</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="uk-container" style="max-width: 1800px; font-family:'微軟正黑體','黑體';">
