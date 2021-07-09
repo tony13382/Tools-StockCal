@@ -48,10 +48,25 @@ function addRecord() {
   var table1 = document.getElementById("quick_cal_n1").value + "";
   var table2 = document.getElementById("quick_cal_n2").value + "";
   innerHTMLCode = innerHTMLCode + "<tr><td>" + table1 + "</td><td>-</td><td>" + table2 + "</td><td>=</td><td>" + document.getElementById("quick_cal_ans").value + "</td></tr>";
-  document.getElementById("record-list").innerHTML = innerHTMLCode;
+  setInnerhtmlAt(document.getElementById("record-list"), innerHTMLCode, false);
 }
 
 function clearRecord() {
   innerHTMLCode = "";
-  document.getElementById("record-list").innerHTML = innerHTMLCode + "<tr><td>無計算紀錄</td></tr>";
+  setInnerhtmlAt(document.getElementById("record-list"), innerHTMLCode + "<tr><td>無計算紀錄</td></tr>", false);
+}
+
+function setInnerhtmlAt(element, HTML, count) {
+  element.innerHTML = HTML;
+
+  if (!count) {
+    count = 1;
+  }
+
+  if (element.innerHTML == '' && count < 5) {
+    ++count;
+    setTimeout(function () {
+      setInnerhtmlHTML(element, HTML, count);
+    }, 50);
+  }
 }
