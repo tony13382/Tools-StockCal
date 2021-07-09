@@ -20,7 +20,7 @@
 </head>
 
 <body style="background-color: #FEDFE1;">
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+    <div id="offcanvas-overlay" uk-offcanvas="overlay: true; mode:push;">
         <div class="uk-offcanvas-bar" style="background-color: #63484d;">
 
             <button class="uk-offcanvas-close" type="button" uk-close></button>
@@ -51,12 +51,10 @@
             </div>
             <div class=" uk-overflow-auto">
                 <table class="uk-table uk-table-small uk-table-divider uk-margin-remove-top">
-                    <tbody id="record-list">
-                        <tr>
-                            <td>無計算紀錄</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <tbody id="record-list">
+                    <tr><td>無計算紀錄</td></tr>
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
