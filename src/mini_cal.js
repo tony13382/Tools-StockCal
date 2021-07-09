@@ -25,8 +25,11 @@ function sol_to_n1() {
             timeout: '2000'
         });
     }
-    else
+    else{
         document.getElementById("quick_cal_n1").value = convert;
+        document.getElementById("quick_cal_ans").value = "";
+    }
+        
 }
 
 function sol_to_n2() {
@@ -38,15 +41,17 @@ function sol_to_n2() {
             timeout: '2000'
         });
     } 
-    else
+    else{
         document.getElementById("quick_cal_n2").value = convert;
+        document.getElementById("quick_cal_ans").value = "";
+    }
 }
 
 var innerHTMLCode="";
 function addRecord() {
     let table1 = document.getElementById("quick_cal_n1").value+"";
     let table2 = document.getElementById("quick_cal_n2").value+"";
-    innerHTMLCode = innerHTMLCode + "" + table1 + " - " + table2 + " = <span class='uk-badge'>" + document.getElementById("quick_cal_ans").value + "</span><hr>";
+    innerHTMLCode = "" + table1 + " - " + table2 + " = <span class='uk-badge'>" + document.getElementById("quick_cal_ans").value + "</span><hr>" + innerHTMLCode;
     setInnerhtmlAt(document.getElementById("record-list"),innerHTMLCode,false);
 
 }
