@@ -1,3 +1,8 @@
+/*import {
+  atan2, chain, derivative, e, evaluate, log, pi, pow, round, sqrt
+} from 'mathjs'*/
+
+
 /*試算法切換*/
 var count_way = "price";
 
@@ -209,7 +214,7 @@ function count_stock() {
 			n1 = count.total;
 			sub = n1 - n2;
 		}while(sub<=target);
-		document.getElementById("show_count_target").innerHTML = set_stock_price + set_gap_value * num;
+		document.getElementById("show_count_target").innerHTML = set_stock_price + set_gap_value * (num - 1);
 		document.getElementById("show_count_target_price").innerHTML = target;
 		document.getElementById("show_count_price").innerHTML = sub;
 		document.getElementById("show_count_sell").innerHTML = n1;
@@ -232,7 +237,7 @@ function count_stock() {
 			n1 = count.total;
 			sub = n1 - n2;
 		}while(sub>=target);
-		document.getElementById("show_count_target").innerHTML = set_stock_price + set_gap_value * num;
+		document.getElementById("show_count_target").innerHTML = set_stock_price + set_gap_value * (num + 1);
 		document.getElementById("show_count_target_price").innerHTML = target;
 		document.getElementById("show_count_price").innerHTML = sub;
 		document.getElementById("show_count_sell").innerHTML = n1;
