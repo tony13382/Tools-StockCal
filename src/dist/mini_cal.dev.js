@@ -47,13 +47,13 @@ var innerHTMLCode = "";
 function addRecord() {
   var table1 = document.getElementById("quick_cal_n1").value + "";
   var table2 = document.getElementById("quick_cal_n2").value + "";
-  innerHTMLCode = innerHTMLCode + "<tr><td>" + table1 + "</td><td>-</td><td>" + table2 + "</td><td>=</td><td>" + document.getElementById("quick_cal_ans").value + "</td></tr>";
+  innerHTMLCode = innerHTMLCode + "" + table1 + " - " + table2 + " = <span class='uk-badge'>" + document.getElementById("quick_cal_ans").value + "</span><hr>";
   setInnerhtmlAt(document.getElementById("record-list"), innerHTMLCode, false);
 }
 
 function clearRecord() {
   innerHTMLCode = "";
-  setInnerhtmlAt(document.getElementById("record-list"), innerHTMLCode + "<tr><td>無計算紀錄</td></tr>", false);
+  setInnerhtmlAt(document.getElementById("record-list"), innerHTMLCode + "無計算紀錄", false);
 }
 
 function setInnerhtmlAt(element, HTML, count) {
