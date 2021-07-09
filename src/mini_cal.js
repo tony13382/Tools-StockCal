@@ -10,7 +10,10 @@ function dis() {
         n1 = 0;
         n2 = 0;
     }
-    document.getElementById("quick_cal_ans").value = (n1 - n2);
+    else{
+        document.getElementById("quick_cal_ans").value = (n1 - n2);
+        addRecord()
+    }
 }
 
 function sol_to_n1() {
@@ -37,4 +40,16 @@ function sol_to_n2() {
     } 
     else
         document.getElementById("quick_cal_n2").value = convert;
+}
+
+var innerHTMLCode="";
+function addRecord() {
+    let table1 = document.getElementById("quick_cal_n1").value+"";
+    let table2 = document.getElementById("quick_cal_n2").value+"";
+    innerHTMLCode = innerHTMLCode + "<tr><td>" + table1 + "</td><td>-</td><td>" + table2 + "</td><td>=</td><td>" + document.getElementById("quick_cal_ans").value + "</td></tr>";
+    document.getElementById("record-list").innerHTML = innerHTMLCode
+}
+function clearRecord() {
+    innerHTMLCode = "";
+    document.getElementById("record-list").innerHTML = innerHTMLCode + "<tr><td>無計算紀錄</td></tr>";
 }
