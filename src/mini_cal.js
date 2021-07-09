@@ -51,7 +51,7 @@ var innerHTMLCode="";
 function addRecord() {
     let table1 = document.getElementById("quick_cal_n1").value+"";
     let table2 = document.getElementById("quick_cal_n2").value+"";
-    innerHTMLCode = "" + table1 + " - " + table2 + " = <span class='uk-badge'>" + document.getElementById("quick_cal_ans").value + "</span><hr>" + innerHTMLCode;
+    innerHTMLCode = "" + table1 + " - " + table2 + " = <br><span class='uk-badge'>" + document.getElementById("quick_cal_ans").value + "</span><hr>" + innerHTMLCode;
     setInnerhtmlAt(document.getElementById("record-list"),innerHTMLCode,false);
 
 }
