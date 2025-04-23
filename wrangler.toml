@@ -1,5 +1,4 @@
 name = "fgstockcal"
 compatibility_date = "2025-04-23"
 
-[site]
-bucket = "."
+assets = { directory = "." }
