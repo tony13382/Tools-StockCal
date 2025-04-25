@@ -18,11 +18,172 @@
     <script src="assets/js/uikit.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>MeowLu股票試算器</title>
+    <style>
+        :root {
+            /* Primary color palette - muted/subdued peach theme */
+            --primary-color: #e0a798;
+            --primary-light: #ecd4cc;
+            --primary-dark: #c6866f;
+            --accent-color: #7aaca2;
+            --bg-color: #f9f2ef;
+            --card-bg: #ffffff;
+            --text-color: #4d4141;
+            --text-light: #776868;
+            
+            /* UI elements */
+            --button-bg: var(--primary-color);
+            --button-hover: #cc9382;
+            --button-text: white;
+            --danger-color: #cc7e7e;
+            --sidebar-bg: #b47863;
+            --sidebar-text: #f9f2ef;
+            --input-border: #e8d0c8;
+            --header-color: var(--primary-dark);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            font-family: '微軟正黑體', '黑體', sans-serif;
+            color: var(--text-color);
+        }
+        
+        h1, h3 {
+            color: var(--header-color);
+        }
+        
+        .uk-card {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: var(--card-bg);
+            transition: transform 0.2s;
+        }
+        
+        .uk-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .uk-button-primary {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .uk-button-primary:hover {
+            background-color: var(--button-hover);
+        }
+        
+        .uk-button-danger {
+            background-color: var(--danger-color);
+            border-radius: 4px;
+        }
+        
+        .uk-button-danger:hover {
+            background-color: #f27883;
+        }
+        
+        .uk-input, .uk-select {
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+        }
+        
+        .uk-input:focus, .uk-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(224, 167, 152, 0.2);
+        }
+        
+        .calculator-button {
+            background-color: var(--primary-color);
+            color: var(--button-text);
+            border-radius: 16px;
+            z-index: 10000;
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            width: 64px;
+            height: 64px;
+            padding: 0px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .calculator-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background-color: var(--button-hover);
+        }
+        
+        .uk-offcanvas-bar {
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+        }
+        
+        .uk-alert-primary {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            border-radius: 4px;
+        }
+        
+        .uk-table-divider tr {
+            border-color: var(--input-border);
+        }
+        
+        .uk-card-title {
+            position: relative;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .uk-card-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        /* Footer styling */
+        footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            background-color: var(--primary-dark);
+            color: var(--sidebar-text);
+        }
+        
+        footer .uk-text-center {
+            color: var(--sidebar-text);
+        }
+        
+        footer a {
+            color: var(--sidebar-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        footer a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+        
+        /* Additional utility classes */
+        .accent-text {
+            color: var(--accent-color);
+        }
+        
+        .no-ans {
+            color: var(--text-light);
+            font-style: italic;
+        }
+    </style>
 </head>
 
-<body style="background-color: #FEDFE1;">
+<body>
     <div id="offcanvas-overlay" uk-offcanvas="overlay: true; mode:push;">
-        <div class="uk-offcanvas-bar" style="background-color: #63484d;">
+        <div class="uk-offcanvas-bar">
 
             <button class="uk-offcanvas-close" type="button" uk-close></button>
 
@@ -50,22 +211,23 @@
                     <?xml version="1.0" encoding="UTF-8"?><svg width="24" height="24" viewBox="0 0 48 48" style="display: flex;" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="white" fill-opacity="0.01"/><path fill-rule="evenodd" clip-rule="evenodd" d="M20 5.91396H28V13.914H43V21.914H5V13.914H20V5.91396Z" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 40H40V22H8V40Z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/><path d="M16 39.8975V33.914" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 39.8975V33.8975" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 39.8975V33.914" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 40H36" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
             </div>
-            <div class="" style="">
-                
+            <div class="">
                 <div id="record-list">
                     無計算紀錄
                 </div>
             </div>
         </div>
     </div>
-    <div class="uk-container" style="max-width: 1800px; font-family:'微軟正黑體','黑體';">
+    <div class="uk-container  uk-container-center">
         <div height="10px"></div>
-        <h1 class="uk-text-center"><span style="font-family:'微軟正黑體','黑體'; color: #5963D8;">MeowLu股票試算器</span></h1>
+        <h1 class="uk-text-center uk-margin-medium-top uk-margin-medium-bottom">
+            股票試算器
+        </h1>
         
-        <div uk-grid>
+        <div uk-grid  style="max-width: 1800px;">
             <!--cal btn-->
             <div class="">
-                <button class="uk-button uk-button-primary " type="button" uk-toggle="target: #offcanvas-overlay" style="width: 64px; height: 64px; padding: 0px;  border-radius: 16px; z-index: 10000; position: fixed; bottom: 16px; right: 16px; background-color: #b0898e;">
+                <button class="uk-button uk-button-primary calculator-button" type="button" uk-toggle="target: #offcanvas-overlay">
                     <?xml version="1.0" encoding="UTF-8"?><svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" fill="white" fill-opacity="0.01"/><path d="M48 0H0V48H48V0Z" fill="white" fill-opacity="0.01"/><path d="M40.0005 4H8.00069C6.89614 4 6.00071 4.89541 6.00069 5.99996L6.00004 42C6.00002 43.1045 6.89546 44 8.00004 44H40.0005C41.1051 44 42.0005 43.1046 42.0005 42V6C42.0005 4.89543 41.1051 4 40.0005 4Z" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/><path d="M35 10H13V19H35V10Z" fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/><path d="M12 28L19 35" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 28L12 35" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 35H36" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 29H36" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
             </div>
@@ -152,19 +314,19 @@
                                     <tr>
                                         <td>交易模式</td>
                                         <td>
-                                            <p id="sol_mode">no ANS</p>
+                                            <p id="sol_mode" class="no-ans">no ANS</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>股價</td>
                                         <td>
-                                            <p id="sol_stock_price">no ANS</p>
+                                            <p id="sol_stock_price" class="no-ans">no ANS</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>銀行手續費</td>
                                         <td>
-                                            <p id="sol_commi">no ANS</p>
+                                            <p id="sol_commi" class="no-ans">no ANS</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -172,13 +334,13 @@
                                             <p>稅金</p>
                                         </td>
                                         <td>
-                                            <p id="sol_tax">no ANS</p>
+                                            <p id="sol_tax" class="no-ans">no ANS</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td id="total_title">總額</td>
                                         <td>
-                                            <p id="sol_total">no ANS</p>
+                                            <p id="sol_total" class="no-ans">no ANS</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -251,37 +413,37 @@
                                     <tr>
                                         <td class="tb_title">損/益</td>
                                         <td>
-                                            <p id="show_count_mode">未計算</p>
+                                            <p id="show_count_mode" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb_title">目標股價</td>
                                         <td>
-                                            <p id="show_count_target">未計算</p>
+                                            <p id="show_count_target" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb_title">預估損益</td>
                                         <td>
-                                            <p id="show_count_target_price">未計算</p>
+                                            <p id="show_count_target_price" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb_title">實際損益</td>
                                         <td>
-                                            <p id="show_count_price">未計算</p>
+                                            <p id="show_count_price" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb_title">購入成本</td>
                                         <td>
-                                            <p id="show_count_buy">未計算</p>
+                                            <p id="show_count_buy" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="tb_title">售出總額</td>
                                         <td>
-                                            <p id="show_count_sell">未計算</p>
+                                            <p id="show_count_sell" class="no-ans">未計算</p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -299,13 +461,8 @@
     <script src="src/mini_cal.js"></script>
 </body>
 <footer>
-    <div class="uk-alert-primary" uk-alert style="margin-top:20px;">
-            <a class="uk-alert-close" uk-close></a>
-            <p>你可以到此觀看更多本作者專案</p>
-            <a href="https://www.lianglu.uk/" target="_blank" class="uk-button uk-button-primary">See More</a>
-        </div>
     <div class="uk-text-center uk-card-body">
-        COPYRIGHT BY 2020 · Made by Liang Chin (MeowLu)
+        COPYRIGHT BY 2020 · Made by <a href="https://lianglu.uk" target="_blank" rel="noopener noreferrer">Liang Chin (MeowLu)</a>
     </div>
 </footer>
 
