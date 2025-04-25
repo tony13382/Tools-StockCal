@@ -18,7 +18,7 @@ var count_mode = "E";
 function change_count_mode() {
     if (count_mode == "E") {
         count_mode = "S";
-        document.getElementById("show_on_countmode").innerHTML = "&darr;   現在為損";
+        document.getElementById("show_on_countmowde").innerHTML = "&darr;   現在為損";
         document.getElementById("show_on_countmode").className = "uk-button uk-button-danger";
     } else if (count_mode == "S") {
         count_mode = "E";
